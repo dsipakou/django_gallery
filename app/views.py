@@ -5,7 +5,7 @@ from app.models import Image
 from app.serializers import ImageSerializer
 
 
-class ImageView(APIView):
+class ImagesView(APIView):
     authentication_classes = ()
     permission_classes = ()
 
@@ -15,5 +15,16 @@ class ImageView(APIView):
     def get(self, request):
         images = Image.objects.all()
         serializer = ImageSerializer(images, many=True)
+        return Response(serializer.data)
+
+class ImageView(APIView):
+    authentication_classes = ()
+    permission_classes = ()
+    model = Image
+    serializer_class = ImageSerializer
+
+    def get(self, request, image_id):
+        image = Image.objects.get(id=image_id)
+        serializer = ImageSerializer(image, many=False)
         return Response(serializer.data)
 

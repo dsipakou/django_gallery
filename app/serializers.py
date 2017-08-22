@@ -8,7 +8,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('name', 'desc', 'image', 'created_at', 'updated_at')
+        fields = ('id', 'name', 'desc', 'image', 'created_at', 'updated_at')
 
     def serialize_image(self, image):
         return image.image.url if image else None
